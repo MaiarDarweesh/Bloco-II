@@ -8,10 +8,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table (name = "tb_categoria")
 public class Categoria {
 	
+	@JsonIgnoreProperties
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
