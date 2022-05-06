@@ -4,61 +4,86 @@ import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity
-@Table (name = "tb_produto")
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Entity // Faz o objeto virar uma table no BD
+@Table(name = "tb_produto") // Da o nome a tabela
 public class Produto {
+	
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue // Equivalente ao auto_increment no mysql
 	public Long id;
 	
-	
 	@NotBlank
-	@Size (min = 3, max = 20)
-	public String nome;
+	@Size(min = 5, max = 100, message = "Min 3 e max de 100")
+	public String titulo;
 	
 	@NotNull
-	public BigDecimal preco;
+	public BigDecimal valor;
 	
-	@NotBlank
-	@Size (min = 3, max = 50)
-	public String descricao;
+	@NotNull
+	public BigDecimal peso;
+	
+	@NotNull
+	public Long codigo;
+	
+	@ManyToOne 
+	@JsonIgnoreProperties
+	private Categoria categoria;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
-	public BigDecimal getPreco() {
-		return preco;
+	public BigDecimal getValor() {
+		return valor;
 	}
 
-	public void setPreco(BigDecimal preco) {
-		this.preco = preco;
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public BigDecimal getPeso() {
+		return peso;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setPeso(BigDecimal peso) {
+		this.peso = peso;
 	}
+
+	public Long getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
 }
