@@ -1,4 +1,4 @@
-package com.generation.blogpessoal.medel;
+package com.generation.blogpessoal.model;
 
 import java.util.Date;
 
@@ -37,6 +37,10 @@ public class Postagem {
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("usuario")
+	private Usuario usuario;
 
 	
 	public Tema getTema() {
@@ -78,5 +82,14 @@ public class Postagem {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
 	
 }
