@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.generation.mundogames.model.Categoria;
+import com.generation.mundogames.model.Produto;
 import com.generation.mundogames.repository.CategoriaRepository;
 
 @RestController
@@ -27,22 +28,28 @@ public class CategoriaController {
 	@Autowired
 	private CategoriaRepository repository;
 	
-	@GetMapping ("/{id}")
-	public ResponseEntity<List<Categoria>> GetAll (){
-		return ResponseEntity.ok(repository.findAll());
+	@GetMapping 
+		public ResponseEntity<List<Categoria>> GetAll(){ 
+			return ResponseEntity.ok(repository.findAll());
 	}
 	
-	@GetMapping ("/setor/ {setor}")
+	
+	/*@GetMapping ("/{id}")
+	public ResponseEntity<List<Categoria>> GetAll (){
+		return ResponseEntity.ok(repository.findAll());
+	}*/
+	
+	@GetMapping ("/setor/{setor}")
 	public ResponseEntity<List<Categoria>> GetBySetor(@PathVariable String setor) {
 		return ResponseEntity.ok(repository.findAllBySetorContainingIgnoreCase (setor));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Categoria> postcategoria (@Valid @RequestBody Categoria categoria){
-		return ResponseEntity.status(HttpStatus.OK).body(repository.save(categoria));
+	public ResponseEntity<Categoria> post (@Valid @RequestBody Categoria categoria){
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(categoria));
 	}
 	@PutMapping
-	public ResponseEntity<Categoria> putcategoria (@Valid @RequestBody Categoria categoria){
+	public ResponseEntity<Categoria> put (@Valid @RequestBody Categoria categoria){
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(categoria));
 	}
 	@DeleteMapping ("/{id}")

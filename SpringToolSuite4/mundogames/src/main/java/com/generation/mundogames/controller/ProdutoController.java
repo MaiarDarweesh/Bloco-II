@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.generation.mundogames.model.Categoria;
 import com.generation.mundogames.model.Produto;
 import com.generation.mundogames.repository.ProdutoRepository;
 @RestController
@@ -26,14 +27,15 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoRepository repository;
 	
-	@GetMapping
+	@GetMapping 
 	public ResponseEntity<List<Produto>> GetAll (){
 		return ResponseEntity.ok(repository.findAll());
 	}
-	@PostMapping
-	public ResponseEntity<Produto> postproduto (@Valid @RequestBody Produto produto) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(produto));
+	@PostMapping 
+	public ResponseEntity<Produto> post (@Valid @RequestBody Produto produto){ // faz requisição da body
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(produto)); // salva a requisiçao
 	}
+	
 	@PutMapping
 	public ResponseEntity<Produto> putProduto (@Valid @RequestBody Produto produto) {
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(produto));
