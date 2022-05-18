@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Entity
 	@Table(name="tb_usuarios")
 	public class Usuario {
@@ -24,8 +26,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 		
 		private String nome;
 		
+		@Schema (example = "nome@email.com")
 		@NotNull
-		@Email(message = "O usuário deve ser um email valido ex:maria@email.com")
+		@Email(message = "O usuário deve ser um email valido ex:nome@email.com")
 		private String usuario;
 		
 		@NotNull

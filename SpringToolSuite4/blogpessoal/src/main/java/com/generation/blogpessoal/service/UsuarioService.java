@@ -32,8 +32,17 @@ public class UsuarioService {
 		
 		return encoder.encode(senha);
 	}
+	public Optional<Usuario> atualizarUsuario(Usuario usuario){
+
+	      if(repository.findById(usuario.getId()).isPresent()) {//Checar se encontrou alguma coisa
+
+	          usuario.setSenha(criptografarSenha(usuario.getSenha()));
+	         return Optional.ofNullable(repository.save(usuario)); //Nulllable impede o nulo
+	      }
+	      return Optional.empty();
+	}
 	
-	public Optional<UsuarioLogin> autenticaUsuario(Optional<UsuarioLogin> usuarioLogin) {
+	public Optional<UsuarioLogin> autenticarUsuario(Optional<UsuarioLogin> usuarioLogin) {
 		Optional<Usuario> usuario = repository.findByUsuario(usuarioLogin.get().getUsuario());
 		
 		if(usuario.isPresent()) {
